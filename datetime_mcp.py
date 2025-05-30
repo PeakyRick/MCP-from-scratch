@@ -30,5 +30,14 @@ def current_datetime(timezone: str = "America/New_York") -> str:
     except pytz.exceptions.UnknownTimeZoneError:
         return f"Error: Unknown timezone '{timezone}'. Please use a valid timezone name."
 
-if __name__ == "__main__":
+def local_run():
     mcp.run(transport="stdio")
+
+def remote_run():
+    port = int(os.getenv("PORT", 8000))
+    host = os.getenv("HOST", "0.0.0.0")
+    mcp.run(transport="sse", host=host, port=port)
+
+if __name__ == "__main__":
+    # local_run()
+    remote_run()
