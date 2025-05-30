@@ -1,8 +1,8 @@
-
 from mcp.server.fastmcp import FastMCP
 import datetime
 import pytz
 import os
+import asyncio
 
 mcp = FastMCP(
     name="Current Date and Time",
@@ -34,9 +34,14 @@ def local_run():
     mcp.run(transport="stdio")
 
 def remote_run():
-    port = int(os.getenv("PORT", 8000))
-    host = os.getenv("HOST", "0.0.0.0")
-    mcp.run(transport="sse", host=host, port=port)
+    port = int(os.environ.get("PORT", 8000))
+    asyncio.run(
+        mcp.run_sse_async(
+            host="0.0.0.0",  # Changed from 127.0.0.1 to allow external connections
+            port=port,
+            log_level="debug"
+        )
+    )
 
 if __name__ == "__main__":
     # local_run()
