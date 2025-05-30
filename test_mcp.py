@@ -24,4 +24,4 @@ def RSWall_goodbye_tool(name: str):
     return f"Goodbye {name}! I am RSWall wiki MCP. See you next time!"
 
 if __name__ == "__main__":
-    mcp.run(transport="http")
+    mcp.run(transport="stdio")

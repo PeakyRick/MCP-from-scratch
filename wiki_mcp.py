@@ -27,7 +27,7 @@ def retrieve_from_RSWall_wiki(query: str):
     formatted_context = format_context(context)
     return formatted_context
 
-if __name__ == "__main__":
+def remote_run():
     import asyncio
     port = int(os.getenv("PORT", "8000"))
     # TODO: finish this, so it runs on Render
@@ -38,3 +38,9 @@ if __name__ == "__main__":
         log_level="debug"
         )
     )
+
+def local_run():
+    mcp.run(transport="stdio")
+
+if __name__ == "__main__":
+    local_run()

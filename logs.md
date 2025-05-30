@@ -1,3 +1,6 @@
+# May 28
+Unsure if MCP transport updated since early May. Still Need to figure out how to run it in remote
+
 # May 11
 basically following the below example. Managed to give access to Claude Desktop of the tools I made, one of them is essentially the RSWall Wiki tool I am using on the side. 
 
