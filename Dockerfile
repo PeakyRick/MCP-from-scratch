@@ -8,8 +8,8 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip install uv
-RUN uv pip install --no-cache-dir -r requirements.txt
+# RUN pip install uv
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY datetime_mcp.py .
