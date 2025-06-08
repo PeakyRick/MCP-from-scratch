@@ -1,7 +1,10 @@
 import os
 from fastmcp import FastMCP
 
-mcp = FastMCP(name="MyMcpServer")
+mcp = FastMCP(
+    name="MyMcpServer",
+    stateless_http=True  # Required for streamable-http transport
+)
 
 @mcp.tool()
 def greet(name: str) -> str:
