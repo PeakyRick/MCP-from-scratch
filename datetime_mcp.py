@@ -43,6 +43,10 @@ def remote_run():
         )
     )
 
+def streamable_run():
+    mcp.run(transport="streamable-http", host="0.0.0.0", port=8000, path="/mcp")
+
 if __name__ == "__main__":
     # local_run()
-    remote_run()
+    # remote_run()
+    streamable_run()
