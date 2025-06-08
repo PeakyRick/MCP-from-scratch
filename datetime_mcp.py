@@ -6,9 +6,9 @@ import asyncio
 
 mcp = FastMCP(
     name="Current Date and Time",
-    instructions="When you are asked for the current date or time, call current_datetime() and pass along an optional timezone parameter (defaults to NYC)."
+    instructions="When you are asked for the current date or time, call current_datetime() and pass along an optional timezone parameter (defaults to NYC).",
+    stateless_http=True
 )
-
 
 @mcp.tool()
 def current_datetime(timezone: str = "America/New_York") -> str:
@@ -30,23 +30,24 @@ def current_datetime(timezone: str = "America/New_York") -> str:
     except pytz.exceptions.UnknownTimeZoneError:
         return f"Error: Unknown timezone '{timezone}'. Please use a valid timezone name."
 
-def local_run():
+def ss_local_run():
     mcp.run(transport="stdio")
 
-def remote_run():
-    port = int(os.environ.get("PORT", 8000))
-    asyncio.run(
-        mcp.run_sse_async(
-            host="0.0.0.0",  # Changed from 127.0.0.1 to allow external connections
-            port=port,
-            log_level="debug"
-        )
-    )
+def local_run():
+    host = "127.0.0.1"
+    port = 8000
+    mcp.run(transport="streamable-http",
+            host=host,
+            port=port)
 
-def streamable_run():
-    mcp.run(transport="streamable-http", host="0.0.0.0", port=8000, path="/mcp")
+def remote_run():
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    
+    mcp.run(transport="streamable-http",
+            host=host,
+            port=port)
 
 if __name__ == "__main__":
     # local_run()
-    # remote_run()
-    streamable_run()
+    remote_run()

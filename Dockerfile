@@ -23,5 +23,5 @@ ENV HOST=0.0.0.0
 ENV PORT=8000
 
 # Run the application
-# CMD ["python", "datetime_mcp.py"] 
-CMD ["python", "server.py"]
+CMD ["python", "datetime_mcp.py"] 
+# CMD ["python", "server.py"]
